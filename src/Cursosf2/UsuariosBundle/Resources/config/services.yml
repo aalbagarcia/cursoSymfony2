@@ -1,0 +1,7 @@
+parameters:
+#    cursosf2_usuarios.example.class: Cursosf2\UsuariosBundle\Example
+
+services:
+#    cursosf2_usuarios.example:
+#        class: %cursosf2_usuarios.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

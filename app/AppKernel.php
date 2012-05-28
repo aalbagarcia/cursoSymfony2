@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Cursosf2\XchangeRatesBundle\Cursosf2XchangeRatesBundle(),
             new Cursosf2\GeolocalizacionBundle\Cursosf2GeolocalizacionBundle(),
             new Cursosf2\GrupoBundle\Cursosf2GrupoBundle(),
+            new Cursosf2\UsuariosBundle\Cursosf2UsuariosBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
