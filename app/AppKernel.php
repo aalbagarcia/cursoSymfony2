@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Cursosf2\XchangeRatesBundle\Cursosf2XchangeRatesBundle(),
             new Cursosf2\GeolocalizacionBundle\Cursosf2GeolocalizacionBundle(),
+            new Cursosf2\GrupoBundle\Cursosf2GrupoBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
