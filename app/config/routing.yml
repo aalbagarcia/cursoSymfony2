@@ -1,3 +1,8 @@
+Cursosf2GeolocalizacionBundle:
+    resource: "@Cursosf2GeolocalizacionBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 Cursosf2XchangeRatesBundle:
     resource: "@Cursosf2XchangeRatesBundle/Resources/config/routing.yml"
     prefix:   /
