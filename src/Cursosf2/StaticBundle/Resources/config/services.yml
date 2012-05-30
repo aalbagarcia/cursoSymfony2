@@ -1,0 +1,7 @@
+parameters:
+#    cursosf2_static.example.class: Cursosf2\StaticBundle\Example
+
+services:
+#    cursosf2_static.example:
+#        class: %cursosf2_static.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

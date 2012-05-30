@@ -1,3 +1,7 @@
+Cursosf2StaticBundle:
+    resource: "@Cursosf2StaticBundle/Resources/config/routing.yml"
+    prefix:   /
+
 Cursosf2UsuariosBundle:
     resource: "@Cursosf2UsuariosBundle/Resources/config/routing.yml"
     prefix:   /
