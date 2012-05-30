@@ -63,6 +63,10 @@ class Grupo
     private $miembros;
 
 
+    public function __construct() {
+        $this->miembros = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *

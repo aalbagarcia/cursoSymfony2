@@ -84,8 +84,12 @@ class Usuario
      *
      * @ORM\OneToMany(targetEntity="\Cursosf2\GrupoBundle\Entity\Miembro", mappedBy="miembro")
      */
-    private $miembrode;
+    protected $miembrode;
 
+
+    public function __construct() {
+        $this->miembrode = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -263,6 +267,7 @@ class Usuario
      * @return  \Doctrine\Common\Collections\Collection
      */
     public function getMiembrode() {
+
         return $this->miembrode;
     }
 

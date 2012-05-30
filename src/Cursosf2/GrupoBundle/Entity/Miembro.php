@@ -16,7 +16,7 @@ class Miembro
      * @var integer $grupo
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="\Cursosf2\GrupoBundle\Entity\Grupo")
+     * @ORM\ManyToOne(targetEntity="\Cursosf2\GrupoBundle\Entity\Grupo", inversedBy="miembros")
      * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id")
      */
     private $grupo;
@@ -24,7 +24,7 @@ class Miembro
      * @var integer $usuario
      *
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="\Cursosf2\UsuariosBundle\Entity\Usuario")
+     * @ORM\ManyToOne(targetEntity="\Cursosf2\UsuariosBundle\Entity\Usuario", inversedBy="miembrode")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     private $usuario;
