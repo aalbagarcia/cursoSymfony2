@@ -16,8 +16,13 @@ You should have received a copy of the GNU General Public License
  <http://www.gnu.org/licenses/>.
 #}
 
-{% extends "::base.html.twig" %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
-<p>Portada del Curso de Symfony2<br>(twig)</p>
-{% endblock %}
+   <h1>Contacto</h1>
+
+    <form>
+        nombre: <input type="text"><br>
+        <button type=submit>Enviar</button>
+    </form>
+{% endblock%}

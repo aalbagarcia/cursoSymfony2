@@ -1,3 +1,7 @@
 homepage:
     pattern:  /
     defaults: { _controller: Cursosf2StaticBundle:Default:homepage }
+
+contenido_estatico:
+    pattern: /sitio/{pagina}
+    defaults: { _controller: Cursosf2StaticBundle:Default:sitio }
