@@ -20,19 +20,34 @@ namespace Cursosf2\GeolocalizacionBundle\Tests\Entity;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion;
+use Cursosf2\GeolocalizacionBundle\Tests\DataFixtures\ORM\GeolocalizacionTestData;
 class GeolocalizacionFunctionalTest extends WebTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
      */
-    private $em;
-
+    protected $em;
+    protected $_application;
     public function setUp()
     {
         $kernel = static::createKernel();
         $kernel->boot();
         $this->em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
+
+        $this->_application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $this->_application->setAutoExit(false);
+        $this->runConsole("doctrine:schema:drop", array("--force" => true));
+        $this->runConsole("doctrine:schema:create");
+        $this->runConsole("doctrine:fixtures:load", array("--fixtures" => __DIR__ . "/../DataFixtures", '--purge-with-truncate' => true));
     }
+
+    protected function runConsole($command, Array $options = array()) {
+        $options["-e"] = "test";
+        $options["-q"] = null;
+        $options = array_merge($options, array('command' => $command));
+        return $this->_application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
+    }
+
 
     /**
      *
@@ -56,5 +71,16 @@ class GeolocalizacionFunctionalTest extends WebTestCase
 
         $results = $this->em->getRepository('\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion')->findBy(array('city' => $city, 'state' => $state));
         $this->assertCount(1, $results);
+    }
+
+    /**
+     * Test sencillo para comprobar que los fixtures se cargan correctamente
+     */
+    public function testWithFixtures()
+    {
+        $results = $this->em->createQuery("SELECT g from Cursosf2GeolocalizacionBundle:Geolocalizacion g WHERE g.city LIKE :city")->
+                                setParameter('city',GeolocalizacionTestData::$TEXT_PREFIX.'%')->
+                                getResult();
+        $this->assertCount(GeolocalizacionTestData::$MAX_LOCATIONS, $results);
     }
 }
