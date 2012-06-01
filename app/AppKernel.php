@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Cursosf2\GrupoBundle\Cursosf2GrupoBundle(),
             new Cursosf2\UsuariosBundle\Cursosf2UsuariosBundle(),
             new Cursosf2\StaticBundle\Cursosf2StaticBundle(),
+            new Cursosf2\ReunionesBundle\Cursosf2ReunionesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

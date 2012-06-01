@@ -1,14 +1,14 @@
 <?php
 
-namespace Cursosf2\GrupoBundle\Entity;
+namespace Cursosf2\ReunionesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cursosf2\GrupoBundle\Entity\Reunion
+ * Cursosf2\ReunionesBundle\Entity\Reunion
  *
- * @ORM\Table(name="Cursosf2_Reunion")
- * @ORM\Entity(repositoryClass="Cursosf2\GrupoBundle\Entity\ReunionRepository")
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Cursosf2\ReunionesBundle\Entity\ReunionRepository")
  */
 class Reunion
 {
@@ -41,6 +41,13 @@ class Reunion
      * @ORM\Column(name="fecha_creacion", type="datetime")
      */
     private $fecha_creacion;
+
+    /**
+     * @var datetime $fecha_reunion
+     *
+     * @ORM\Column(name="fecha_reunion", type="datetime")
+     */
+    private $fecha_reunion;
 
 
     /**
@@ -111,5 +118,25 @@ class Reunion
     public function getFechaCreacion()
     {
         return $this->fecha_creacion;
+    }
+
+    /**
+     * Set fecha_reunion
+     *
+     * @param datetime $fechaReunion
+     */
+    public function setFechaReunion($fechaReunion)
+    {
+        $this->fecha_reunion = $fechaReunion;
+    }
+
+    /**
+     * Get fecha_reunion
+     *
+     * @return datetime 
+     */
+    public function getFechaReunion()
+    {
+        return $this->fecha_reunion;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cursosf2\GrupoBundle\Entity;
+namespace Cursosf2\ReunionesBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

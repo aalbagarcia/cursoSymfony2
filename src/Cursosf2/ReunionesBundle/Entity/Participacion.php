@@ -1,14 +1,14 @@
 <?php
 
-namespace Cursosf2\GrupoBundle\Entity;
+namespace Cursosf2\ReunionesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cursosf2\GrupoBundle\Entity\Participacion
+ * Cursosf2\ReunionesBundle\Entity\Participacion
  *
- * @ORM\Table(name="Cursosf2_Participacion")
- * @ORM\Entity(repositoryClass="Cursosf2\GrupoBundle\Entity\ParticipacionRepository")
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Cursosf2\ReunionesBundle\Entity\ParticipacionRepository")
  */
 class Participacion
 {

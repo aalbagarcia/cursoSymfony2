@@ -1,0 +1,7 @@
+parameters:
+#    cursosf2_reuniones.example.class: Cursosf2\ReunionesBundle\Example
+
+services:
+#    cursosf2_reuniones.example:
+#        class: %cursosf2_reuniones.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
