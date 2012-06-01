@@ -19,5 +19,41 @@ You should have received a copy of the GNU General Public License
 {% extends "::base.html.twig" %}
 
 {% block body %}
-<p>Portada del Curso de Symfony2<br>(twig)</p>
+<div id='contenedor'>
+    <header>
+        <div id='logo'><img src="/images/static/logo.png"></div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Buscar</a></li>
+                <li><a href="#">Acceso</a></li>
+            </ul>
+        </nav>
+    </header>
+    <article class="portada">
+        <section class="próximas-reuniones">
+            #LISTADO DE PRÓXIMAS REUNIONES
+        </section>
+
+        <section class="ultimas-reuniones">
+            #LISTADO DE ÚLTIMAS REUNIONES
+        </section>
+
+        <section class="buscar-reuniones">
+            #FORMULARIO DE BÚSQUEDA DE REUNIONES
+        </section>
+
+        <section class="ultimos-movimientos">
+            #MUESTRA ÚLTIMOS MOVIMIENTOS
+        </section>
+
+    </article>
+    <footer>
+        &copy; - 2012 - Cursosf2Application
+        <a href="#">Quiénes somos</a>
+        <a href="#">Contacto</a>
+        <a href="#">Ayuda</a>
+    </footer>
+</div>
+
 {% endblock %}

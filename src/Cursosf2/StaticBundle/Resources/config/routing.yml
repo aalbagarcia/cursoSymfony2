@@ -5,3 +5,6 @@ homepage:
 contenido_estatico:
     pattern: /sitio/{pagina}
     defaults: { _controller: Cursosf2StaticBundle:Default:sitio }
+_contenido_estatico:
+    pattern: /sitio/{pagina}/
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: contenido_estatico }
