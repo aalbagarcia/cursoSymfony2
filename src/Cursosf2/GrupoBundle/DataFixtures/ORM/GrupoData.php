@@ -17,12 +17,13 @@
  */
 namespace Cursosf2\GrupoBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Cursosf2\GrupoBundle\Entity\Grupo;
 
-class GrupoData implements FixtureInterface
+class GrupoData extends AbstractFixture implements OrderedFixtureInterface
 {
     static private $MAX_GRUPOS = 10;
     public function  load(ObjectManager $manager) {
@@ -32,8 +33,14 @@ class GrupoData implements FixtureInterface
             $grupo->setNombre("GRUPO $i");
             $grupo->setSlug("grupo-$i");
             $grupo->setFechaCreacion(new \DateTime('now - '.$i*rand(1,100).' days'));
+
+            $grupo->setSede($manager->merge($this->getReference('Geolocalizacion-'.$i)));
             $manager->persist($grupo);
         }
         $manager->flush();
+    }
+
+    public function getOrder() {
+        return 2;
     }
 }
