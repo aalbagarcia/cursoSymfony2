@@ -12,14 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Participante
 {
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    const RSVP_SIN_CONFIRMAR = 0;
+    const RSVP_ASISTE = 1;
+    const RSVP_NO_ASISTE = 2;
+    const RSVP_QUIZAS_ASISTE = 3;
 
     /**
      * @var integer $rsvp
