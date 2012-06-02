@@ -37,8 +37,14 @@ class DefaultController extends Controller
      */
     public function homepageAction()
     {
+        //$em = new \Doctrine\ORM\EntityManager();
+        $em = $this->getDoctrine()->getEntityManager();
+        $proximasReuniones = $em->createQuery('SELECT r FROM Cursosf2ReunionesBundle:Reunion r WHERE r.fecha_reunion > :fecha ORDER BY r.fecha_reunion ASC')->
+            setParameter('fecha', new \DateTime('now'))->
+            setMaxResults(5)->
+            execute();
         //return new \Symfony\Component\HttpFoundation\Response('Portada del Curso de Symfony2');
-        return $this->render('Cursosf2StaticBundle:Default:homepage.html.twig');
+        return $this->render('Cursosf2StaticBundle:Default:homepage.html.twig', array('proximasReuniones' => $proximasReuniones));
     }
 
     /**

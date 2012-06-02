@@ -1,4 +1,5 @@
 {#
+<!DOCTYPE HTML>
  This file is part of Cursosf2Application.
 
 Cursosf2Application is free software: you can redistribute it and/or modify
@@ -24,15 +25,31 @@ You should have received a copy of the GNU General Public License
         <div id='logo'><img src="/images/static/logo.png"></div>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
+                <li><a href="{{ path('homepage') }}">Inicio</a></li>
                 <li><a href="#">Buscar</a></li>
                 <li><a href="#">Acceso</a></li>
             </ul>
         </nav>
     </header>
     <article class="portada">
-        <section class="próximas-reuniones">
-            #LISTADO DE PRÓXIMAS REUNIONES
+        <section class="proximas-reuniones">
+            {% if proximasReuniones|length > 0 %}
+                <ul>
+                    {% for reunion in proximasReuniones%}
+                        <li>
+                            <div class="foto-elemento">
+                                <img src="">
+                            </div>
+                            <div class="info-element">
+                                <div class="nombre-elemento">{{ reunion.nombre }}</div>
+                                <div>Grupo: {{ reunion.grupo.nombre }}</div>
+                                <time datetime="{{ reunion.fechaReunion | date() }}">{{ reunion.fechaReunion | date() }}</time>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
         </section>
 
         <section class="ultimas-reuniones">
@@ -49,10 +66,10 @@ You should have received a copy of the GNU General Public License
 
     </article>
     <footer>
-        &copy; - 2012 - Cursosf2Application
-        <a href="#">Quiénes somos</a>
-        <a href="#">Contacto</a>
-        <a href="#">Ayuda</a>
+        &copy; - {{ 'now' | date('Y') }} - Cursosf2Application
+        <a href="{{ path('contenido_estatico', {'pagina': 'quienes-somos'}) }}">Quiénes somos</a>
+        <a href="{{ path('contenido_estatico', {'pagina': 'contacto'}) }}">Contacto</a>
+        <a href="{{ path('contenido_estatico', {'pagina': 'ayuda'}) }}">Ayuda</a>
     </footer>
 </div>
 

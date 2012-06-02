@@ -50,6 +50,14 @@ class Grupo
     private $fecha_creacion;
 
     /**
+     * @var string $foto
+     *
+     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
+     */
+    private $foto;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion")
      * @ORM\JoinColumn(name="sede_id", referencedColumnName="id")
      **/
@@ -165,6 +173,26 @@ class Grupo
         return $this->fecha_creacion;
     }
 
+
+    /**
+     * Devuelve la ruta relativa a la foto.
+     *
+     * @return string
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+
+    /**
+     * Asigna la ruta relativa de la foto.
+     * @param $foto
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+    }
     /**
      * Devuelve la sede del grupo
      *
