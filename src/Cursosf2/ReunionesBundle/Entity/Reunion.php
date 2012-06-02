@@ -49,7 +49,32 @@ class Reunion
      */
     private $fecha_reunion;
 
+    /**
+     * @var \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion  $lugar
+     * @ORM\ManyToOne(targetEntity="\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion")
+     * @ORM\JoinColumn(name="lugar_id", referencedColumnName="id")
+     */
+    private $lugar;
 
+    /**
+     * @var \Cursosf2\GrupoBundle\Entity\Grupo $grupo
+     *
+     * @ORM\ManyToOne(targetEntity="\Cursosf2\GrupoBundle\Entity\Grupo", inversedBy="reuniones")
+     * @ORM\JoinColumn(name="grupo_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $grupo;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection $participantes
+     *
+     * @ORM\OneToMany(targetEntity="\Cursosf2\ReunionesBundle\Entity\Participante", mappedBy="participante")
+     */
+    private $participantes;
+
+
+    public function __construct() {
+        $this->participantes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -138,5 +163,42 @@ class Reunion
     public function getFechaReunion()
     {
         return $this->fecha_reunion;
+    }
+
+    /**
+     * Devuelve el lugar de la reunión
+     *
+     * @return \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion
+     */
+    public function getLugar() {
+        return $this->lugar;
+    }
+
+    /**
+     * Fija el lugar de la reunión
+     *
+     * @param \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $lugar
+     */
+    public function setLugar(\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $lugar) {
+        $this->lugar = $lugar;
+    }
+
+    /**
+     * Get grupo
+     *
+     * @return \Cursosf2\GrupoBundle\Entity\Grupo
+     */
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
+
+    /**
+     * Devuelve los participantes de una reunión
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParticipantes() {
+        return $this->participantes;
     }
 }

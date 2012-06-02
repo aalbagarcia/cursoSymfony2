@@ -86,9 +86,16 @@ class Usuario
      */
     protected $miembrode;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection $participaen
+     *
+     * @ORM\OneToMany(targetEntity="\Cursosf2\ReunionesBundle\Entity\Participante", mappedBy="usuario")
+     */
+    private $participaen;
 
     public function __construct() {
         $this->miembrode = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->participaen = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -269,6 +276,16 @@ class Usuario
     public function getMiembrode() {
 
         return $this->miembrode;
+    }
+
+    /**
+     * Obtiene las participaciones de un usuario, es decir, los objetos Participante a los que pertenece el usuario.
+     * A partir de estos objetos podemos sacar la reunión.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParticipaen() {
+        return $this->participaen;
     }
 
     /**

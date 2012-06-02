@@ -65,7 +65,15 @@ class Grupo
 
     public function __construct() {
         $this->miembros = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reuniones = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection $reuniones
+     *
+     * @ORM\OneToMany(targetEntity="\Cursosf2\ReunionesBundle\Entity\Reunion", mappedBy="reunion")
+     */
+    private $reuniones;
 
     /**
      * Get id
@@ -182,5 +190,14 @@ class Grupo
      */
     public function getMiembros() {
         return $this->miembros;
+    }
+
+    /**
+     * Obtiene las reuniones de un grupo
+     *
+     * @return  \Doctrine\Common\Collections\Collection
+     */
+    public function getReuniones() {
+        return $this->reuniones;
     }
 }
