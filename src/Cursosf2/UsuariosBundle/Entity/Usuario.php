@@ -262,7 +262,7 @@ class Usuario
      *
      * @param \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $homeaddress
      */
-    public function setSede(\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $homeaddress) {
+    public function setHomeaddress(\Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $homeaddress) {
         $this->homeaddress = $homeaddress;
     }
 
