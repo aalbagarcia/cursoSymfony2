@@ -138,7 +138,7 @@ class Reunion
     /**
      * Get fecha_creacion
      *
-     * @return datetime 
+     * @return DateTime
      */
     public function getFechaCreacion()
     {
@@ -193,6 +193,14 @@ class Reunion
         return $this->grupo;
     }
 
+    /**
+     * Asigna el grupo
+     *
+     * @param \Cursosf2\GrupoBundle\Entity\Grupo $grupo
+     */
+    public function setGrupo(\Cursosf2\GrupoBundle\Entity\Grupo $grupo) {
+        $this->grupo = $grupo;
+    }
     /**
      * Devuelve los participantes de una reunión
      *
