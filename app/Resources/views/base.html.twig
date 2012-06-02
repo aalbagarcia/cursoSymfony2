@@ -7,7 +7,25 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <header>
+            <div id='logo'><img src="/images/static/logo.png"></div>
+            {% block topnav %}
+            <nav>
+                <ul>
+                    <li><a href="{{ path('homepage') }}">Inicio</a></li>
+                    <li><a href="#">Buscar</a></li>
+                    <li><a href="#">Acceso</a></li>
+                </ul>
+            </nav>
+            {% endblock %}
+        </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <footer>
+            &copy; - {{ 'now' | date('Y') }} - Cursosf2Application
+            <a href="{{ path('contenido_estatico', {'pagina': 'quienes-somos'}) }}">Quiénes somos</a>
+            <a href="{{ path('contenido_estatico', {'pagina': 'contacto'}) }}">Contacto</a>
+            <a href="{{ path('contenido_estatico', {'pagina': 'ayuda'}) }}">Ayuda</a>
+        </footer>
     </body>
 </html>

@@ -21,21 +21,11 @@ You should have received a copy of the GNU General Public License
 
 {% block body %}
 <div id='contenedor'>
-    <header>
-        <div id='logo'><img src="/images/static/logo.png"></div>
-        <nav>
-            <ul>
-                <li><a href="{{ path('homepage') }}">Inicio</a></li>
-                <li><a href="#">Buscar</a></li>
-                <li><a href="#">Acceso</a></li>
-            </ul>
-        </nav>
-    </header>
     <article class="portada">
         <section class="proximas-reuniones">
             {% if proximasReuniones|length > 0 %}
                 <ul>
-                    {% for reunion in proximasReuniones%}
+                    {% for reunion in proximasReuniones %}
                         <li>
                             <div class="foto-elemento">
                                 <img src="">
@@ -65,12 +55,6 @@ You should have received a copy of the GNU General Public License
         </section>
 
     </article>
-    <footer>
-        &copy; - {{ 'now' | date('Y') }} - Cursosf2Application
-        <a href="{{ path('contenido_estatico', {'pagina': 'quienes-somos'}) }}">Quiénes somos</a>
-        <a href="{{ path('contenido_estatico', {'pagina': 'contacto'}) }}">Contacto</a>
-        <a href="{{ path('contenido_estatico', {'pagina': 'ayuda'}) }}">Ayuda</a>
-    </footer>
 </div>
 
 {% endblock %}
