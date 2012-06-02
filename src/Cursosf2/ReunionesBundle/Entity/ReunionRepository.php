@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class ReunionRepository extends EntityRepository
 {
+    /**
+     * Devuelve las reuniones cuya fecha de reunión sea superior a una fecha dada
+     * @param DateTime|null $fecha
+     * @param int $limit
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function findProximasReuniones(\DateTime $fecha = null, $limit = 5) {
+        if (!$fecha) {
+            $fecha = new \DateTime('now');
+        }
+        $em = $this->getEntityManager();
+        $dql = 'SELECT r FROM Cursosf2ReunionesBundle:Reunion r
+                  WHERE r.fecha_reunion > :fecha
+                  ORDER BY r.fecha_reunion ASC';
+        return $em->createQuery($dql)->
+            setParameter('fecha', $fecha)->
+            setMaxResults($limit)->
+            execute();
+    }
 }
