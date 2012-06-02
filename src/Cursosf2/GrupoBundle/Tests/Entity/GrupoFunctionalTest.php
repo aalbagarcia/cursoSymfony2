@@ -108,6 +108,24 @@ class GrupoFunctionalTest extends WebTestCase
         }
     }
 
+    public function testGetUsuarioComoMiembro() {
+        $timestamp = time();
+        $nombre = 'addUsuario '.$timestamp;
+        $grupo = $this->crearGrupo($nombre);
+        $usuarios = $this->crearUsuarios(1);
+        $miembro = $grupo->getUsuarioComoMiembro($usuarios[0]);
+        $this->em->persist($miembro);
+        $this->em->flush();
+
+        $results = new \Doctrine\Common\Collections\ArrayCollection();
+        $results = $this->em->getRepository('Cursosf2GrupoBundle:Grupo')->findBy(array('nombre' => 'GRUPO TEST '.$nombre));
+        $fetchedUser = $this->em->getRepository('Cursosf2UsuariosBundle:Usuario')->find($usuarios[0]->getId());
+        $this->assertCount(1, $results, 'El grupo se recupera correctamente');
+        $this->assertCount(1, $results[0]->getMiembros(), 'El grupo tiene un miembro ');
+        $this->assertCount(1, $fetchedUser->getMiembrode(), 'El usuario pertenece a un grupo');
+
+    }
+
     /**
      * Crea un grupo en BBDD y lo devuelve
      *

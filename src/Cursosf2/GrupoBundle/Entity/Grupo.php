@@ -200,4 +200,26 @@ class Grupo
     public function getReuniones() {
         return $this->reuniones;
     }
+
+    /**
+     * Añade un usuario al grupo creando la correspondiente entrada en la tabla Miembro
+     *
+     * @param \Cursosf2\UsuariosBundle\Entity\Usuario $usuario
+     * @param DateTime $fechaAlta
+     *
+     * @return \Cursosf2\GrupoBundle\Entity\Miembro
+     */
+    public function getUsuarioComoMiembro(\Cursosf2\UsuariosBundle\Entity\Usuario $usuario, \DateTime $fechaAlta = null) {
+        $miembro = new Miembro();
+        $miembro->setGrupo($this);
+        $miembro->setUsuario($usuario);
+        if(!$fechaAlta) {
+            $miembro->setFechaAlta(new \DateTime('now'));
+        } else {
+            $miembro->setFechaAlta($fechaAlta);
+        }
+        $usuario->getMiembrode()->add($miembro);
+        $this->miembros->add($miembro);
+        return $miembro;
+    }
 }
