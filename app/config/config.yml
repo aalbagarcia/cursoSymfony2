@@ -58,3 +58,8 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+parameters:
+    # Parámetro definido en la configuración general. No se usa para la portada, se mantiene aquí
+    # como recordatorio
+    # cursosf2.portada.proximas_reuniones: 3

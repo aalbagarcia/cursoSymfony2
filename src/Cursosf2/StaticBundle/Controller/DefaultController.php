@@ -41,7 +41,11 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $proximasReuniones = $em->createQuery('SELECT r FROM Cursosf2ReunionesBundle:Reunion r WHERE r.fecha_reunion > :fecha ORDER BY r.fecha_reunion ASC')->
             setParameter('fecha', new \DateTime('now'))->
-            setMaxResults(5)->
+            // La siguiente línea usa un parámetro de la configuración definido en app/config/config.yml.
+            // No se usa, se mantiene comentado a modo de recordatorio
+            //setMaxResults($this->container->getParameter('cursosf2.portada.proximas_reuniones'))->
+            setMaxResults($this->container->getParameter('cursosf2.static_bundle.portada.proximas_reuniones'))->
+
             execute();
         //return new \Symfony\Component\HttpFoundation\Response('Portada del Curso de Symfony2');
         return $this->render('Cursosf2StaticBundle:Default:homepage.html.twig', array('proximasReuniones' => $proximasReuniones));

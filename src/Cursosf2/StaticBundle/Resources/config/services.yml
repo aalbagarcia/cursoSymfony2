@@ -1,6 +1,6 @@
 parameters:
 #    cursosf2_static.example.class: Cursosf2\StaticBundle\Example
-
+    cursosf2.static_bundle.portada.proximas_reuniones: 4
 services:
 #    cursosf2_static.example:
 #        class: %cursosf2_static.example.class%
