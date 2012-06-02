@@ -7,7 +7,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Foobar is distributed in the hope that it will be useful,
+ * Cursosf2Application is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -25,9 +25,9 @@ use Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion;
 
 class GeolocalizacionData extends AbstractFixture implements OrderedFixtureInterface
 {
-    private static $MAX_LOCATIONS = 10;
+    const MAX_LOCATIONS = 50;
     public function  load(ObjectManager $manager) {
-        for ($i=0; $i < self::$MAX_LOCATIONS ; $i++){
+        for ($i=0; $i < self::MAX_LOCATIONS ; $i++){
             $geolocalizacion = new Geolocalizacion();
             $geolocalizacion->setCity('CIUDAD '.$i);
             $geolocalizacion->setLat(40.403562 + rand(-100, 100)/100);
