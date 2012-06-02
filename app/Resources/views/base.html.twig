@@ -19,17 +19,24 @@ Cursosf2Application is free software: you can redistribute it and/or modify
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{ asset('bundles/cursosf2grupo/css/bootstrap.css') }}" type="text/css" rel="stylesheet"
+              media="screen" />
+        <link href="{{ asset('bundles/cursosf2grupo/css/frontend.css') }}" type="text/css" rel="stylesheet"
+              media="screen" />
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        <footer>
-            &copy; - {{ 'now' | date('Y') }} - Cursosf2Application
-            <a href="{{ path('contenido_estatico', {'pagina': 'quienes-somos'}) }}">Quiénes somos</a>
-            <a href="{{ path('contenido_estatico', {'pagina': 'contacto'}) }}">Contacto</a>
-            <a href="{{ path('contenido_estatico', {'pagina': 'ayuda'}) }}">Ayuda</a>
-        </footer>
+        <div class="container">
+            {% block body %}{% endblock %}
+            <footer>
+                &copy; - {{ 'now' | date('Y') }} - Cursosf2Application
+                <a href="{{ path('contenido_estatico', {'pagina': 'quienes-somos'}) }}">Quiénes somos</a>
+                <a href="{{ path('contenido_estatico', {'pagina': 'contacto'}) }}">Contacto</a>
+                <a href="{{ path('contenido_estatico', {'pagina': 'ayuda'}) }}">Ayuda</a>
+            </footer>
+            {% block javascripts %}{% endblock %}
+        </div>
+
     </body>
 </html>

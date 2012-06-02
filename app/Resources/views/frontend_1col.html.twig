@@ -17,14 +17,19 @@ Cursosf2Application is free software: you can redistribute it and/or modify
 {% extends '::base.html.twig' %}
 {% block body %}
     <header>
-        <div id='logo'><img src="/images/static/logo.png"></div>
+
         {% block topnav %}
-        <nav>
-            <ul>
-                <li><a href="{{ path('homepage') }}">Inicio</a></li>
-                <li><a href="#">Buscar</a></li>
-                <li><a href="#">Acceso</a></li>
-            </ul>
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li><div id='logo'><img src="/images/static/logo.png"></div></li>
+                        <li><a href="{{ path('homepage') }}">Inicio</a></li>
+                        <li><a href="#">Buscar</a></li>
+                        <li><a href="#">Acceso</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
         {% endblock %}
     </header>

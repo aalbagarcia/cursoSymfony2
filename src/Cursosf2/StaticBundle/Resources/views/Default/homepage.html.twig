@@ -23,9 +23,11 @@ You should have received a copy of the GNU General Public License
 
 {% block article %}
 <div id='contenedor'>
-    <article class="portada">
-        <section class="proximas-reuniones">
+
+    <article class="portada row">
+        <section class="proximas-reuniones span6">
             {% if proximasReuniones|length > 0 %}
+                <h2>Próximas reuniones</h2>
                 <ul>
                     {% for reunion in proximasReuniones %}
                         <li>
@@ -33,7 +35,7 @@ You should have received a copy of the GNU General Public License
                                 <img src="">
                             </div>
                             <div class="info-element">
-                                <div class="nombre-elemento">{{ reunion.nombre }}</div>
+                                <h4 class="nombre-elemento"> <a href="#">{{ reunion.nombre }}</a></h4>
                                 <div>Grupo: {{ reunion.grupo.nombre }}</div>
                                 <time datetime="{{ reunion.fechaReunion | date() }}">{{ reunion.fechaReunion | date() }}</time>
                             </div>
@@ -44,16 +46,16 @@ You should have received a copy of the GNU General Public License
 
         </section>
 
-        <section class="ultimas-reuniones">
-            #LISTADO DE ÚLTIMAS REUNIONES
+        <section class="buscar-reuniones span6">
+            <h2>Buscar reuniones</h2>
         </section>
-
-        <section class="buscar-reuniones">
-            #FORMULARIO DE BÚSQUEDA DE REUNIONES
-        </section>
-
-        <section class="ultimos-movimientos">
-            #MUESTRA ÚLTIMOS MOVIMIENTOS
+    </article>
+     <article class="row">
+         <section class="ultimas-reuniones span6">
+             <h2>Últimas reuniones</h2>
+         </section>
+         <section class="ultimos-movimientos span6">
+             <h2>Últimos movimientos</h2>
         </section>
 
     </article>
