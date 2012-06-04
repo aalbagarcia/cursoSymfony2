@@ -1,3 +1,13 @@
 Cursosf2UsuariosBundle_grupos:
     pattern:  /grupos
     defaults: { _controller: Cursosf2UsuariosBundle:Default:grupos }
+
+Cursosf2UsuariosBundle_login:
+    pattern: /login
+    defaults: { _controller: Cursosf2UsuariosBundle:Default:login}
+
+Cursosf2UsuariosBundle_login_check:
+    pattern: /login_check
+
+Cursosf2UsuariosBundle_logout:
+    pattern: /logout

@@ -8,7 +8,7 @@ Cursosf2StaticBundle:
 
 Cursosf2UsuariosBundle:
     resource: "@Cursosf2UsuariosBundle/Resources/config/routing.yml"
-    prefix:   /usuarios
+    prefix:   /usuario
 
 Cursosf2GrupoBundle:
     resource: "@Cursosf2GrupoBundle/Resources/config/routing.yml"

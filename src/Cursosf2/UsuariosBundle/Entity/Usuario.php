@@ -253,7 +253,8 @@ class Usuario implements UserInterface
      */
     public function getSalt()
     {
-        return $this->salt;
+        //return $this->salt;
+        return null;
     }
 
     /**

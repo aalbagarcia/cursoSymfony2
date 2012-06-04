@@ -1,38 +1,66 @@
 security:
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
-    providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
     firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+        frontend:
+            pattern:      ^/
+            anonymous:    ~
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
+                login_path: /usuario/login
+                check_path: /usuario/login_check
             logout:
-                path:   /demo/secured/logout
-                target: /demo/
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
-
+                path:   /usuario/logout
+                target: homepage
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/*, roles: [ROLE_USUARIO, ROLE_DAMIN] }
+    providers:
+        all:
+            providers: [default, usuarios]
+        default:
+            users:
+                mem_user:  { password: mem_user, roles: 'ROLE_USER' }
+                mem_admin: { password: mem_admin, roles: 'ROLE_ADMIN' }
+        usuarios:
+            entity: { class: Cursosf2\UsuariosBundle\Entity\Usuario, property: email}
+    encoders:
+         Cursosf2\UsuariosBundle\Entity\Usuario: plaintext
+         #Cursosf2\UsuariosBundle\Entity\Usuario: { algorithm: sha512, iterations: 10}
+
+
+#    encoders:
+#        Symfony\Component\Security\Core\User\User: plaintext
+#
+#    role_hierarchy:
+#        ROLE_ADMIN:       ROLE_USER
+#        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+#
+#    providers:
+#        in_memory:
+#            users:
+#                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+#
+#    firewalls:
+#        dev:
+#            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
+#
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            form_login:
+#                check_path: /demo/secured/login_check
+#                login_path: /demo/secured/login
+#            logout:
+#                path:   /demo/secured/logout
+#                target: /demo/
+#            #anonymous: ~
+#            #http_basic:
+#            #    realm: "Secured Demo Area"
+#
+#    access_control:
+#        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+#        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
