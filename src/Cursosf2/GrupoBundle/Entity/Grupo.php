@@ -66,7 +66,7 @@ class Grupo
     /**
      * @var \Doctrine\Common\Collections\Collection $miembros
      *
-     * @ORM\OneToMany(targetEntity="\Cursosf2\GrupoBundle\Entity\Miembro", mappedBy="miembro")
+     * @ORM\OneToMany(targetEntity="\Cursosf2\GrupoBundle\Entity\Miembro", mappedBy="grupo")
      */
     private $miembros;
 
