@@ -39,6 +39,7 @@ class UsuarioData extends AbstractFixture implements OrderedFixtureInterface
             $usuario->setSalt('SALT '.$i);
             $usuario->setDescripcion('DESCRIPCION '.$i);
             $usuario->setSlug('slug-'.$i);
+            $usuario->setEmail('email-'.$i.'@gmail.com');
             $usuario->setHomeaddress($manager->merge($this->getReference('Geolocalizacion-'.$i)));
             $manager->persist($usuario);
             $manager->flush();

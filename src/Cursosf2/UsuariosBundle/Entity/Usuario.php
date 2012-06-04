@@ -3,6 +3,7 @@
 namespace Cursosf2\UsuariosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Cursosf2\UsuariosBundle\Entity\Usuario
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Cursosf2_Usuario")
  * @ORM\Entity(repositoryClass="Cursosf2\UsuariosBundle\Entity\UsuarioRepository")
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var integer $id
@@ -69,6 +70,13 @@ class Usuario
      * @ORM\Column(name="salt", type="string", length=255)
      */
     private $salt;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
 
     /**
      * @var \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion $homeaddress
@@ -249,6 +257,26 @@ class Usuario
     }
 
     /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * Devuelve la dirección homeaddress del usuario
      *
      * @return \Cursosf2\GeolocalizacionBundle\Entity\Geolocalizacion
@@ -295,5 +323,23 @@ class Usuario
      */
     public function __toString() {
         return $this->nombre.' '.$this->apellidos;
+    }
+
+    public function equals(UserInterface $usuario)
+    {
+        return $this->getEmail() == $usuario->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USUARIO');
+    }
+    public function getUsername()
+    {
+        return $this->getEmail();
     }
 }

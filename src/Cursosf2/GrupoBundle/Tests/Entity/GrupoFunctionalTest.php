@@ -173,6 +173,7 @@ class GrupoFunctionalTest extends WebTestCase
             $usuario->setFechaAlta(new \DateTime('now'));
             $usuario->setPassword("PASSWORD_${i}_$random");
             $usuario->setSalt("SALT_${i}_$random");
+            $usuario->setEmail("$i.$random@gmail.com");
             $this->em->persist($usuario);
             $usuarios[]=$usuario;
         }
