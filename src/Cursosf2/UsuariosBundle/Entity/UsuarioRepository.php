@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class UsuarioRepository extends EntityRepository
 {
+    public function findTodosLosGrupos($usuario)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('
+                    SELECT g,m,u FROM Cursosf2GrupoBundle:Grupo g
+                    JOIN g.miembros m JOIN m.usuario u
+                    WHERE m.usuario = :id'
+                )->setParameter('id', $usuario);
+        return $query->execute();
+    }
 }

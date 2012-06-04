@@ -1,0 +1,32 @@
+{#
+ This file is part of Cursosf2Application.
+
+Cursosf2Application is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ Cursosf2Application is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Cursosf2Application.  If not, see <http://www.gnu.org/licenses/>.
+#}
+{% extends '::frontend_1col.html.twig' %}
+    {% block article%}
+        {% if grupos|length > 0 %}
+            <h1> Grupos del usuario {{ usuarioId }} </h1>
+            <table class="table">
+            {% for grupo in grupos %}
+                <tr><td>{{ grupo.nombre }}</td></tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <div class="alert">
+                <button class="close" data-dismiss="alert">×</button>
+                <strong>¡No hay grupos!</strong> No eres miembro de ningún grupo
+            </div>
+        {% endif %}
+    {% endblock%}

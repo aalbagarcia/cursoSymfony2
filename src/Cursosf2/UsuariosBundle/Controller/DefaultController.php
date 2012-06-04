@@ -7,9 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    
-    public function indexAction($name)
-    {
-        return $this->render('Cursosf2UsuariosBundle:Default:index.html.twig', array('name' => $name));
+
+    /**
+     * Acción que muestra los grupos de los que un usuario es miembro.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function gruposAction() {
+        $usuarioId = 1;
+        $em = $this->getDoctrine()->getEntityManager();
+        $grupos = $em->getRepository('Cursosf2UsuariosBundle:Usuario')->findTodosLosGrupos($usuarioId);
+
+        return $this->render('Cursosf2UsuariosBundle:Default:grupos.html.twig', array('grupos' => $grupos, 'usuarioId' => $usuarioId));
     }
 }
