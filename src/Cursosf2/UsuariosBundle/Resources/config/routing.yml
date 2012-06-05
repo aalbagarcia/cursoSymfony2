@@ -1,3 +1,7 @@
+Cursosf2UsuariosBundle_registro:
+    pattern:  /registro
+    defaults: { _controller: Cursosf2UsuariosBundle:Default:registro }
+
 Cursosf2UsuariosBundle_grupos:
     pattern:  /grupos
     defaults: { _controller: Cursosf2UsuariosBundle:Default:grupos }

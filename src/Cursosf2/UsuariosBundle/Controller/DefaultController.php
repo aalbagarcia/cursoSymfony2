@@ -4,6 +4,7 @@ namespace Cursosf2\UsuariosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Cursosf2\UsuariosBundle\Entity\Usuario;
 
 class DefaultController extends Controller
 {
@@ -42,5 +43,16 @@ class DefaultController extends Controller
             'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
             'error'         => $error
         ));
+    }
+
+    public function registroAction() {
+
+        $formulario = $this->createFormBuilder()->
+            add('nombre')->
+            add('apellidos')->
+            add('descripcion','textarea')->
+            add('contrasenha')->
+            getForm();
+        return $this->render('Cursosf2UsuariosBundle:Default:registro.html.twig', array('formulario' => $formulario->createView()));
     }
 }
