@@ -9,6 +9,8 @@ security:
             logout:
                 path:   /usuario/logout
                 target: homepage
+            switch_user: true
+            #switch_user: {role: ROLE_ADMIN}
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }

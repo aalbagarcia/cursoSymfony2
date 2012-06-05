@@ -336,7 +336,11 @@ class Usuario implements UserInterface
 
     public function getRoles()
     {
-        return array('ROLE_USUARIO');
+        $roles = array();
+        if($this->id == 1 ) {
+            $roles[]='ROLE_ALLOWED_TO_SWITCH';
+        }
+        return array_merge($roles, array('ROLE_USUARIO'));
     }
     public function getUsername()
     {

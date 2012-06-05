@@ -17,7 +17,7 @@ Cursosf2Application is free software: you can redistribute it and/or modify
 {% extends '::frontend_1col.html.twig' %}
     {% block article%}
         {% if grupos|length > 0 %}
-            <h1> Grupos del usuario {{ usuarioId }} </h1>
+            <h1> Tus grupos </h1>
             <table class="table">
             {% for grupo in grupos %}
                 <tr><td>{{ grupo.nombre }}</td></tr>

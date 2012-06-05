@@ -14,11 +14,12 @@ class DefaultController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function gruposAction() {
-        $usuarioId = 1;
-        $em = $this->getDoctrine()->getEntityManager();
-        $grupos = $em->getRepository('Cursosf2UsuariosBundle:Usuario')->findTodosLosGrupos($usuarioId);
 
-        return $this->render('Cursosf2UsuariosBundle:Default:grupos.html.twig', array('grupos' => $grupos, 'usuarioId' => $usuarioId));
+        $em = $this->getDoctrine()->getEntityManager();
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $grupos = $em->getRepository('Cursosf2UsuariosBundle:Usuario')->findTodosLosGrupos($usuario->getId());
+
+        return $this->render('Cursosf2UsuariosBundle:Default:grupos.html.twig', array('grupos' => $grupos));
     }
 
     /**
@@ -28,6 +29,9 @@ class DefaultController extends Controller
      */
     public function loginAction()
     {
+        if($this->get('security.context')->isGranted('ROLE_USUARIO')) {
+            return $this->redirect($this->generateUrl('Cursosf2UsuariosBundle_grupos'));
+        }
         $peticion = $this->getRequest();
         $sesion = $peticion->getSession();
         $error = $peticion->attributes->get(

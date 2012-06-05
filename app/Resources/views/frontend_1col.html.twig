@@ -28,6 +28,20 @@ Cursosf2Application is free software: you can redistribute it and/or modify
                         <li><a href="#">Buscar</a></li>
                         <li><a href="#">Acceso</a></li>
                     </ul>
+                    <ul class="nav pull-right">
+                        <li>
+                            {% if is_granted('ROLE_USUARIO') %}
+                                <a href="{{ path('Cursosf2UsuariosBundle_grupos') }}">{{ app.user }}</a>
+                            {% else %}
+                                <a href="{{ path('Cursosf2UsuariosBundle_login') }}">login</a>
+                            {% endif %}
+                        </li>
+                        {% if is_granted('ROLE_USUARIO') %}
+                        <li class="pull-left">
+                            <a href="{{ path('Cursosf2UsuariosBundle_logout') }}">logout</a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </nav>
