@@ -23,8 +23,8 @@ security:
         usuarios:
             entity: { class: Cursosf2\UsuariosBundle\Entity\Usuario, property: email}
     encoders:
-         Cursosf2\UsuariosBundle\Entity\Usuario: plaintext
-         #Cursosf2\UsuariosBundle\Entity\Usuario: { algorithm: sha512, iterations: 10}
+         #Cursosf2\UsuariosBundle\Entity\Usuario: plaintext
+         Cursosf2\UsuariosBundle\Entity\Usuario: { algorithm: sha512, iterations: 10}
 
 
 #    encoders:

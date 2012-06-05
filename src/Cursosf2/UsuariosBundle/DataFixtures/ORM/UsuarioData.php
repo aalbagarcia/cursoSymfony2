@@ -20,13 +20,20 @@ namespace Cursosf2\UsuariosBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Cursosf2\GrupoBundle\Entity\Grupo;
 use Cursosf2\UsuariosBundle\Entity\Usuario;
 use Cursosf2\GrupoBundle\DataFixtures\ORM\GrupoData;
 
-class UsuarioData extends AbstractFixture implements OrderedFixtureInterface
+class UsuarioData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    private $container;
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
     const MAX_USUARIOS = 20;
     const MAX_GROUPS_PER_USER = 5;
     public function  load(ObjectManager $manager) {
@@ -35,8 +42,14 @@ class UsuarioData extends AbstractFixture implements OrderedFixtureInterface
             $usuario->setNombre('NOMBRE '.$i);
             $usuario->setApellidos('APELLIDOS '.$i);
             $usuario->setFechaAlta(new \DateTime('now - '.(rand(0,100).' days')));
-            $usuario->setPassword('PASSWD '.$i);
-            $usuario->setSalt('SALT '.$i);
+
+            $passwd = 'PASSWD'.$i;
+            $salt = md5(time().rand(1,10000000000));
+            $encoder = $this->container->get('security.encoder_factory')
+                ->getEncoder($usuario);
+            $passwd = $encoder->encodePassword($passwd, $salt);
+            $usuario->setPassword($passwd);
+            $usuario->setSalt($salt);
             $usuario->setDescripcion('DESCRIPCION '.$i);
             $usuario->setSlug('slug-'.$i);
             $usuario->setEmail('email-'.$i.'@gmail.com');

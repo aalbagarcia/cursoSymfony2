@@ -30,7 +30,7 @@ class GeolocalizacionFunctionalTest extends WebTestCase
     protected $_application;
     public function setUp()
     {
-        $kernel = static::createKernel();
+        $kernel = new \AppKernel('test', true);
         $kernel->boot();
         $this->em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
 
