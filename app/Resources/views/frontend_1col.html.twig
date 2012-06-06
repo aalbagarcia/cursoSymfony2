@@ -47,6 +47,11 @@ Cursosf2Application is free software: you can redistribute it and/or modify
         </nav>
         {% endblock %}
     </header>
+    {% block flash %}
+        {% if app.session.hasFlash('success') %}
+            <div class="alert alert-success">{{ app.session.getFlash('success') }}</div>
+        {% endif %}
+    {% endblock%}
     <article>
         {% block article %} {% endblock %}
     </article>
