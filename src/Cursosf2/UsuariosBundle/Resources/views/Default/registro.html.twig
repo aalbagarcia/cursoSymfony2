@@ -22,7 +22,17 @@ Cursosf2Application is free software: you can redistribute it and/or modify
 {% block article%}
     <h1>{{ block('title') }}</h1>
     <form action="{{ path('Cursosf2UsuariosBundle_registro') }}" method="post" {{ form_enctype(formulario) }} class="well">
-    {{ form_widget(formulario) }}
-    <button class="btn" type="submit" >Registrarme</button>
-</form>
+        {{ form_errors(formulario) }}
+        <fieldset><legend>Datos personales</legend>
+            {{ form_row(formulario.nombre) }}
+            {{ form_row(formulario.apellidos) }}
+            {{ form_row(formulario.descripcion) }}
+        </fieldset>
+        <fieldset><legend>Datos de acceso</legend>
+            {{ form_row(formulario.email) }}
+            {{ form_row(formulario.password) }}
+        </fieldset>
+        {{ form_rest(formulario) }}
+        <button class="btn" type="submit" >Registrarme</button>
+    </form>
 {% endblock %}
