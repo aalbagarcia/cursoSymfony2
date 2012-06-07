@@ -1,0 +1,48 @@
+{#
+ This file is part of Cursosf2Application.
+
+Cursosf2Application is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ Cursosf2Application is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with Cursosf2Application.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
+{% extends '::frontend_1col.html.twig' %}
+
+{%  block article %}
+    <h1> {{ grupo.nombre }}</h1>
+    {{ grupo.descripcion }}
+    <h2>Info</h2>
+    <div class="grupo-info">
+        <time>{{ grupo.fechaCreacion | date() }}</time>
+        <div class="sede"> Sede: {{ grupo.sede }}</div>
+    </div>
+    <h2>Miembros</h2>
+    {% if grupo.miembros | length > 0%}
+        <ul>
+            {% for miembro in grupo.miembros %}
+                <li>{{ miembro.usuario.nombre }} miembro desde <time>{{miembro.fechaAlta |date()}}</time> </li>
+            {% endfor %}
+        </ul>
+    {% else%}
+
+    {% endif %}
+    <h2>Reuniones</h2>
+    {% if grupo.reuniones | length > 0 %}
+    <ul>
+        {% for reunion in grupo.reuniones %}
+        <li>{{ reunion.nombre }} </li>
+        {% endfor %}
+    </ul>
+    {% else%}
+
+    {% endif %}
+{% endblock %}

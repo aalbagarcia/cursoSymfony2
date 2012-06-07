@@ -79,7 +79,7 @@ class Grupo
     /**
      * @var \Doctrine\Common\Collections\Collection $reuniones
      *
-     * @ORM\OneToMany(targetEntity="\Cursosf2\ReunionesBundle\Entity\Reunion", mappedBy="reunion")
+     * @ORM\OneToMany(targetEntity="\Cursosf2\ReunionesBundle\Entity\Reunion", mappedBy="grupo")
      */
     private $reuniones;
 

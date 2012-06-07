@@ -1,3 +1,18 @@
+# This file is part of Cursosf2Application.
+#
+# Cursosf2Application is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Cursosf2Application is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Cursosf2Application.  If not, see <http://www.gnu.org/licenses/>.
+
 Cursosf2ReunionesBundle:
     resource: "@Cursosf2ReunionesBundle/Resources/config/routing.yml"
     prefix:   /
@@ -12,7 +27,7 @@ Cursosf2UsuariosBundle:
 
 Cursosf2GrupoBundle:
     resource: "@Cursosf2GrupoBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /grupo
 
 Cursosf2GeolocalizacionBundle:
     resource: "@Cursosf2GeolocalizacionBundle/Controller/"

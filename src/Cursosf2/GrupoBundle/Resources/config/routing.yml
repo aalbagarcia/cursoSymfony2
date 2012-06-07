@@ -1,3 +1,20 @@
-Cursosf2GrupoBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: Cursosf2GrupoBundle:Default:index }
+# This file is part of Cursosf2Application.
+#
+# Cursosf2Application is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Cursosf2Application is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Cursosf2Application.  If not, see <http://www.gnu.org/licenses/>.
+
+Cursosf2GrupoBundle_show_grupo:
+    pattern:  /{slug}.{_format}
+    defaults: { _controller: Cursosf2GrupoBundle:Default:show, _format: html}
+    requirements:
+        _format: (html|json)
