@@ -24,9 +24,9 @@ Cursosf2Application is free software: you can redistribute it and/or modify
     <form action="{{ path('Cursosf2UsuariosBundle_registro') }}" method="post" {{ form_enctype(formulario) }} class="well">
         {{ form_errors(formulario) }}
         <fieldset><legend>Datos personales</legend>
-            {{ form_row(formulario.nombre) }}
-            {{ form_row(formulario.apellidos) }}
-            {{ form_row(formulario.descripcion) }}
+            {% include 'Cursosf2UsuariosBundle:Default:registro_form_row.html.twig' with {'campo': formulario.nombre} %}
+            {% include 'Cursosf2UsuariosBundle:Default:registro_form_row.html.twig' with {'campo': formulario.apellidos} %}
+            {% include 'Cursosf2UsuariosBundle:Default:registro_form_row.html.twig' with {'campo': formulario.descripcion} %}
         </fieldset>
         <fieldset><legend>Datos de acceso</legend>
             {{ form_row(formulario.email) }}

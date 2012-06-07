@@ -4,13 +4,18 @@ namespace Cursosf2\UsuariosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 
 /**
  * Cursosf2\UsuariosBundle\Entity\Usuario
  *
  * @ORM\Table(name="Cursosf2_Usuario")
  * @ORM\Entity(repositoryClass="Cursosf2\UsuariosBundle\Entity\UsuarioRepository")
+ * @DoctrineAssert\UniqueEntity(fields= {"email"})
+ * @Assert\Callback(methods={"tienePalabrasProhibidas"})
  */
+
 class Usuario implements UserInterface
 {
     /**
@@ -61,6 +66,7 @@ class Usuario implements UserInterface
      * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\MinLength(limit=8, message = "La contraseña de tener {{ limit }} caracteres")
      */
     private $password;
 
@@ -68,6 +74,8 @@ class Usuario implements UserInterface
      * @var string $salt
      *
      * @ORM\Column(name="salt", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(checkMX=false)
      */
     private $salt;
 
@@ -345,5 +353,17 @@ class Usuario implements UserInterface
     public function getUsername()
     {
         return $this->getEmail();
+    }
+
+    public function tienePalabrasProhibidas(\Symfony\Component\Validator\ExecutionContext $context)
+    {
+        $nombre_propiedad = $context->getPropertyPath() . '.nombre';
+        $dni = $this->getNombre();
+        $palabras = array('restaurante', 'hotel', 'bar', 'cafeteria');
+        if (1 === preg_match('/('.implode('|', $palabras).')/i', $dni)) {
+            $context->setPropertyPath($nombre_propiedad);
+            $context->addViolation('El nombre no puede contener las palabras '.implode(',',$palabras), array(), null);
+        }
+
     }
 }
