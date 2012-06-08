@@ -22,7 +22,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Cursosf2\GrupoBundle\Entity\Grupo;
 use Cursosf2\UsuariosBundle\Entity\Usuario;
 use Cursosf2\GrupoBundle\DataFixtures\ORM\GrupoData;
@@ -34,9 +36,31 @@ class UsuarioData extends AbstractFixture implements OrderedFixtureInterface, Co
     {
         $this->container = $container;
     }
-    const MAX_USUARIOS = 20;
+    const MAX_USUARIOS = 2;
     const MAX_GROUPS_PER_USER = 5;
     public function  load(ObjectManager $manager) {
+
+        // Creando el usuario admin
+        $admin = new Usuario();
+        $admin->setNombre('ADMIN');
+        $admin->setApellidos('ADMIN APELLIDOS');
+        $admin->setFechaAlta(new \DateTime('now - '.(rand(0,100).' days')));
+
+        $passwd = 'ADMIN';
+        $salt = md5(time().rand(1,10000000000));
+        $encoder = $this->container->get('security.encoder_factory')
+            ->getEncoder($admin);
+        $passwd = $encoder->encodePassword($passwd, $salt);
+        $admin->setPassword($passwd);
+        $admin->setSalt($salt);
+        $admin->setDescripcion('DESCRIPCION ADMIN');
+        $admin->setSlug('slug-admin');
+        $admin->setEmail('admin@gmail.com');
+        $admin->setHomeaddress($manager->merge($this->getReference('Geolocalizacion-0')));
+        $manager->persist($admin);
+        $manager->flush();
+
+
         for ($i=0; $i < self::MAX_USUARIOS ; $i++) {
             $usuario = new Usuario();
             $usuario->setNombre('NOMBRE '.$i);
@@ -68,6 +92,37 @@ class UsuarioData extends AbstractFixture implements OrderedFixtureInterface, Co
                 $miembro->setFechaAlta(new \DateTime('now - '.rand(0,100).' days'));
                 $manager->persist($miembro);
                 $grupos[] = $grupo->getId();
+
+                //Añadimos las ACLs
+
+
+                // Este método falla por un bug de symfony
+                //$idObjeto  = ObjectIdentity::fromDomainObject($grupo);
+                $className = ($grupo instanceof \Doctrine\ORM\Proxy\Proxy)
+                    ? get_parent_class($grupo) : get_class($grupo);
+                $idObjeto  = new ObjectIdentity($grupo->getId(), $className);
+                $idUsuario = UserSecurityIdentity::fromAccount($usuario);
+
+                //Borramos las ACLs que ya pudiesen existir en la base de datos
+
+                $provider = $this->container->get('security.acl.provider');
+                try{
+
+                    //Si existen ACLS, no se genera excepción y buscamos las que ya existan
+                    $acl = $provider->findAcl($idObjeto, array($idUsuario));
+                } catch (\Symfony\Component\Security\Acl\Exception\AclNotFoundException $e) {
+                    // Si no existen ACLs se genera excepción y las creamos
+                    $acl = $provider->createAcl($idObjeto);
+                }
+                $aces = $acl->getObjectAces();
+                foreach ($aces as $index => $ace) {
+                    echo "aqui\n";
+                    $acl->deleteObjectAce($index);
+                }
+                // FIN DEL BORRADO
+
+                $acl->insertObjectAce($idUsuario, MaskBuilder::MASK_OPERATOR);
+                $provider->updateAcl($acl);
             }
 
             $this->addReference('Usuario-'.$i, $usuario);

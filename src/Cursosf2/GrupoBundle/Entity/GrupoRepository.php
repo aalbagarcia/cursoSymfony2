@@ -40,9 +40,9 @@ class GrupoRepository extends EntityRepository
     {
         $query = '
             SELECT g,r,m,u FROM Cursosf2GrupoBundle:Grupo g
-            JOIN g.reuniones r
-            JOIN g.miembros m
-            JOIN m.usuario u
+            LEFT JOIN g.reuniones r
+            LEFT JOIN g.miembros m
+            LEFT JOIN m.usuario u
             WHERE g.slug LIKE :slug
         ';
         return $this->getEntityManager()->createQuery($query)->setMaxResults(1)->setParameter('slug', $slug)->getSingleResult();

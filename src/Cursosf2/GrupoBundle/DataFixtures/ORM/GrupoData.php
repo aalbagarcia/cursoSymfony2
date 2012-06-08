@@ -26,7 +26,7 @@ use Cursosf2\GeolocalizacionBundle\DataFixtures\ORM\GeolocalizacionData;
 
 class GrupoData extends AbstractFixture implements OrderedFixtureInterface
 {
-    const MAX_GRUPOS = 100;
+    const MAX_GRUPOS = 5;
     public function  load(ObjectManager $manager) {
         for ($i=0; $i < self::MAX_GRUPOS ; $i++) {
             $grupo = new Grupo();

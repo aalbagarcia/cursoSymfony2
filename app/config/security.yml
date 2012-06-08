@@ -27,6 +27,8 @@ security:
     encoders:
          #Cursosf2\UsuariosBundle\Entity\Usuario: plaintext
          Cursosf2\UsuariosBundle\Entity\Usuario: { algorithm: sha512, iterations: 10}
+    acl:
+        connection: default
 
 
 #    encoders:

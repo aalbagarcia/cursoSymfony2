@@ -20,7 +20,7 @@ Cursosf2Application is free software: you can redistribute it and/or modify
             <h1> Tus grupos </h1>
             <table class="table">
             {% for grupo in grupos %}
-                <tr><td>{{ grupo.nombre }}</td></tr>
+                <tr><td><a href="{{ path('Cursosf2GrupoBundle_show_grupo', {'slug': grupo.slug})}}">{{ grupo.nombre }}</td></tr>
             {% endfor %}
             </table>
         {% else %}

@@ -19,6 +19,8 @@
 namespace Cursosf2\GrupoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 
 class DefaultController extends Controller
@@ -28,6 +30,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $grupo = $em->getRepository('Cursosf2GrupoBundle:Grupo')->findBySlugHydrated($slug);
+        $context = $this->get('security.context');
+        if (false === $context->isGranted('VIEW', $grupo))
+        {
+            throw new AccessDeniedException();
+        }
         if(!$grupo)
         {
             $this->createNotFoundException('Grupo '.$slug.' desconocido.');

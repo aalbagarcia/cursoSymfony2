@@ -29,7 +29,7 @@ use Cursosf2\GrupoBundle\DataFixtures\ORM\GrupoData;
 class ReunionData  extends AbstractFixture implements OrderedFixtureInterface
 {
     const MAX_REUNIONES = 50;
-    const MAX_PARTICIPANTES_POR_REUNION = 20;
+    const MAX_PARTICIPANTES_POR_REUNION = UsuarioData::MAX_USUARIOS;
 
     public function  load(ObjectManager $manager) {
         for($i = 0; $i < self::MAX_REUNIONES; $i++) {
