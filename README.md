@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 cursoSymfony2
 =============
 
@@ -152,3 +153,9 @@ The Symfony Standard Edition comes pre-configured with the following bundles:
 
 Enjoy!
 >>>>>>> Initial Commit
+=======
+cursoSymfony2
+=============
+
+Código fuente desarrollado durante los cursos de Symfony2
+>>>>>>> Initial commit
