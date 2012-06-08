@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
  *
  * @ORM\Table(name="Cursosf2_Usuario")
  * @ORM\Entity(repositoryClass="Cursosf2\UsuariosBundle\Entity\UsuarioRepository")
+ * @ORM\HasLifecycleCallbacks
  * @DoctrineAssert\UniqueEntity(fields= {"email"})
  * @Assert\Callback(methods={"tienePalabrasProhibidas"})
  */
@@ -426,18 +427,43 @@ class Usuario implements UserInterface
         return 'uploads/usuarios/fotosperfil';
     }
 
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->foto) {
+            // do whatever you want to generate a unique name
+            $this->path = uniqid().'.'.$this->foto->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
     public function upload()
     {
-        // Si el campo foto no es obligatoria, esta propiedad puede estar vacía
         if (null === $this->foto) {
             return;
         }
 
-        // TODO: No utilizar el nombre original del fichero
+        // Si hay un error a mover el fichero, se genera una excepción.
+        // Esto evita que se persista la entidad la base de datos.
+        $this->foto->move($this->getUploadRootDir(), $this->path);
 
-        $this->foto->move($this->getUploadRootDir(), $this->foto->getClientOriginalName());
-        $this->path = $this->foto->getClientOriginalName();
+        unset($this->foto);
+    }
 
-        $this->foto = null;
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
     }
 }
