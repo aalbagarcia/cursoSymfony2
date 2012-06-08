@@ -74,8 +74,6 @@ class Usuario implements UserInterface
      * @var string $salt
      *
      * @ORM\Column(name="salt", type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Email(checkMX=false)
      */
     private $salt;
 
