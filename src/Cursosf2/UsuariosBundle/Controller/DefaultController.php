@@ -74,6 +74,7 @@ class DefaultController extends Controller
                 $usuario->setSlug($usuario->getNombre().time().rand(1,10));
                 $usuario->setFechaAlta(new \DateTime('now'));
                 $em = $this->getDoctrine()->getEntityManager();
+                $usuario->upload();
                 $em->persist($usuario);
                 $em->flush();
                 $this->get('session')->setFlash('success',
