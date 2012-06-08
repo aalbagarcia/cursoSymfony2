@@ -29,7 +29,7 @@ class UsuarioType extends AbstractType
             add('apellidos')->
             add('descripcion','textarea')->
             add('email', 'email')->
-            //add('foto', 'file')->
+            add('foto', 'file')->
             add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',

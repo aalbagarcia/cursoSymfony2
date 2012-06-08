@@ -428,21 +428,16 @@ class Usuario implements UserInterface
 
     public function upload()
     {
-        // the file property can be empty if the field is not required
-        if (null === $this->file) {
+        // Si el campo foto no es obligatoria, esta propiedad puede estar vacía
+        if (null === $this->foto) {
             return;
         }
 
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
+        // TODO: No utilizar el nombre original del fichero
 
-        // move takes the target directory and then the target filename to move to
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $this->foto->move($this->getUploadRootDir(), $this->foto->getClientOriginalName());
+        $this->path = $this->foto->getClientOriginalName();
 
-        // set the path property to the filename where you'ved saved the file
-        $this->path = $this->file->getClientOriginalName();
-
-        // clean up the file property as you won't need it anymore
-        $this->file = null;
+        $this->foto = null;
     }
 }
